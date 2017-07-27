@@ -1,10 +1,26 @@
 {
     "name": "structy",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "declarative immutable-ish data structures",
     "main": "./dist/index.js",
-    "author": "Andrew Grewell",
-    "license": "ISC",
+    "author": "Andrew Grewell <andrewgrewell@gmail.com>",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "git@github.com:andrewgrewell/structy.git"
+    },
+    "keywords": [
+        "javascript",
+        "data structure",
+        "immutable",
+        "data",
+        "collections",
+        "models"
+    ],
+    "bugs": {
+        "url": "https://github.com/andrewgrewell/structy/issues"
+    },
+    "homepage": "https://github.com/andrewgrewell/structy#readme",
     "scripts": {
         "test": "jest",
         "build": "rm -rf dist && babel src -d dist --ignore __tests__",

@@ -1,0 +1,8 @@
+{
+    "presets": ["babel-preset-es2015", "stage-2"],
+    "plugins": ["transform-es2015-modules-commonjs"],
+    "ignore": [
+        "node_modules",
+        "dist"
+    ]
+}

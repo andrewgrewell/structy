@@ -1,0 +1,9 @@
+.idea
+node_modules
+Example
+.babelrc
+.eslintrc
+.gitignore
+src
+npm-debug.log
+debug.js

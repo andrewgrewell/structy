@@ -7,8 +7,8 @@
 </div>
 
 Structy aims to provide a flexible and declarative api for managing your applications data. There are other great
-libraries out there such as [Immutable](https://facebook.github.io/immutable-js/) but Structy aims to provide more
-sugar for declaring the schema of your data. Structy has a few core concepts
+libraries out there such as [Immutable](https://facebook.github.io/immutable-js/), but Structy aims to provide more
+sugar for declaring the schema of your data. Structy has a few core concepts:
 1. Allow for Models fields to be configured via `fieldConfig` objects
 ```javascript
 const fieldConfig = {
@@ -46,7 +46,7 @@ console.log(COLORS) // ['red', 'green', 'blue']
 console.log(colorPalette.getColors()) // ['red', 'green', 'blue']
 
 colorPalette.colors = ['blue'] // Error cannot assign to read only property
-colorPalette.colors[2] = 'green' // this works, but your going out of your way to do the wrong thing
+colorPalette.colors[2] = 'green' // this works, but you should always use the getters/setters, not direct access
 ```
 The above example could be improved by using Collections as well as models, and you could save time by
 specifying how the ColorPalette is constructed via a fieldConfig

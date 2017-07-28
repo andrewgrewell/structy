@@ -32,7 +32,7 @@ class Todo extends Model {
     }
 }
 ```
-3. Provide protection from anciently mutating data
+3. Provide protection from accidentally mutating data
 ```javascript
 const COLORS = ['red', 'green', 'blue'];
 const colorPalette = new ColorPalette({ primary: COLORS[1], colors: COLORS });
@@ -48,6 +48,6 @@ console.log(colorPalette.getColors()) // ['red', 'green', 'blue']
 colorPalette.colors = ['blue'] // Error cannot assign to read only property
 colorPalette.colors[2] = 'green' // this works, but your going out of your way to do the wrong thing
 ```
-the above example could be improved by using Collections as well as models, and you could save time by
+The above example could be improved by using Collections as well as models, and you could save time by
 specifying how the ColorPalette is constructed via a fieldConfig
 

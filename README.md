@@ -8,7 +8,7 @@
 
 Structy aims to provide a flexible and declarative api for managing your applications data. There are other great
 libraries out there such as [Immutable](https://facebook.github.io/immutable-js/) but Structy aims to provide more
-sugar for declairing the schema of your data. Structy has a few core concepts
+sugar for declaring the schema of your data. Structy has a few core concepts
 1. Allow for Models fields to be configured via `fieldConfig` objects
 ```javascript
 const fieldConfig = {

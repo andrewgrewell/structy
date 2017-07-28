@@ -16,9 +16,11 @@ const CONFIG_KEYWORDS = ['default', 'nullable', 'constructor'];
  */
 export default class Model {
     constructor(data, fieldConfig) {
-        Object.defineProperty(this, 'fieldConfig', { value: fieldConfig || {} });
-        Object.defineProperty(this, 'size', { value: Object.keys(data || {}).length });
-        Object.defineProperty(this, 'props', { value: {} });
+        Object.defineProperties(this, {
+            fieldConfig: { value: fieldConfig || {} },
+            size: { value: Object.keys(data || {}).length },
+            props: { value: {} }
+        });
         this._initializeModel(data);
     }
 
@@ -26,7 +28,7 @@ export default class Model {
         return merge({}, ...configs);
     }
 
-    _initializeModel(data, object = this) {
+    _initializeModel(data) {
         this._enumerateData(data);
         this._parseConfig(this.fieldConfig);
     }
@@ -138,7 +140,7 @@ export default class Model {
         if (every(data, (value, key) => value === this.props[key])) {
             return this;
         }
-        return new Model(this._enumerateData(data, {...this}));
+        return new Model(this._enumerateData(data, { ...this }));
     }
 
     remove(field) {

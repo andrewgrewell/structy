@@ -15,7 +15,10 @@ const CONFIG_KEYWORDS = ['default', 'nullable', 'constructor'];
  * @param config {object} - { [field]: constructor|config }
  */
 export default class Model {
-    constructor(data, fieldConfig) {
+    constructor(data, fieldConfig, filter) {
+        if (filter) {
+            data = filter(data);
+        }
         Object.defineProperties(this, {
             fieldConfig: { value: fieldConfig || {} },
             size: { value: Object.keys(data || {}).length }

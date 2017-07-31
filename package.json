@@ -1,6 +1,6 @@
 {
     "name": "structy",
-    "version": "0.0.2",
+    "version": "1.0.0",
     "description": "declarative immutable-ish data structures",
     "main": "./dist/index.js",
     "author": "Andrew Grewell <andrewgrewell@gmail.com>",
@@ -27,7 +27,7 @@
         "prepublish": "npm run build",
         "lint:eslint": "eslint --ignore-path .gitignore --ignore-pattern dist --fix",
         "lint:staged": "lint-staged",
-        "debug": "babel-node ./debug.js"
+        "run:example": "babel-node ./example.js"
     },
     "lint-staged": {
         "*.js": [

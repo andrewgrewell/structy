@@ -111,6 +111,18 @@ export default class Collection {
         return this.items.indexOf(item);
     }
 
+    filter(fn) {
+        return this.items.filter(fn);
+    }
+
+    reduce(fn, initial) {
+        return this.items.reduce(fn, initial);
+    }
+
+    map(fn) {
+        return this.items.map(fn);
+    }
+
     findIndex(fn) {
         return this.items.findIndex(fn);
     }

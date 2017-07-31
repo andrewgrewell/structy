@@ -18,8 +18,7 @@ export default class Model {
     constructor(data, fieldConfig) {
         Object.defineProperties(this, {
             fieldConfig: { value: fieldConfig || {} },
-            size: { value: Object.keys(data || {}).length },
-            props: { value: {} }
+            size: { value: Object.keys(data || {}).length }
         });
         this._initializeModel(data);
     }
@@ -46,7 +45,6 @@ export default class Model {
             else if (!existingValue) {
                 let wrappedValue = this._checkWrapValue(null, wrap);
                 if (wrappedValue) {
-                    _set(this.props, path + key, wrappedValue);
                     if (path.length) {
                         // keeping with the precedent of only making first level props read only
                         // anything nested should be its own data structure
@@ -65,7 +63,6 @@ export default class Model {
 
     _enumerateData(data, object = this) {
         forEach(data, (value, key) => {
-            object.props[key] = value;
             Object.defineProperty(object, key, {
                 value: this._checkWrapValue(value, this._getFieldConfigForKey(key)),
                 enumerable: true
@@ -84,26 +81,33 @@ export default class Model {
         if (!wrap) {
             return value;
         }
-        else if (typeof wrap === 'function' && value != null) {
-            return new wrap(value); // eslint-disable-line new-cap
+        else if (typeof wrap === 'function') {
+            return value != null ? new wrap(value) : null; // eslint-disable-line new-cap
         }
         // property config
         else if (isObject(wrap)) {
-            if (wrap.constructor && (value != null || !wrap.nullable)) {
-                return new wrap.constructor(value || wrap.default);
+            if (wrap.constructor && (value != null || wrap.nullable === false)) {
+                return new wrap.constructor(value || this._applyDefaultValue(wrap.default));
             }
             else if (wrap.default) {
-                return wrap.default;
+                return this._applyDefaultValue(wrap.default);
             }
             else {
                 // nested property configs
                 return reduce(wrap, (result, nestedValue, key) => {
-                    result[key] = this._checkWrapValue(nestedValue);
+                    result[key] = this._checkWrapValue(value, nestedValue);
                     return result;
                 }, {});
             }
         }
         return value;
+    }
+
+    _applyDefaultValue(defaultValue) {
+        if (typeof defaultValue === 'function') {
+            return defaultValue(this);
+        }
+        return defaultValue;
     }
 
     // ACCESSORS
@@ -117,7 +121,7 @@ export default class Model {
     }
 
     set(field, value) {
-        if (this.props[field] === value) {
+        if (this[field] === value) {
             return this;
         }
         return new Model({ ...this, [field]: this._checkWrapValue(value, this._getFieldConfigForKey(field)) });
@@ -137,7 +141,7 @@ export default class Model {
     }
 
     assign(data) {
-        if (every(data, (value, key) => value === this.props[key])) {
+        if (every(data, (value, key) => value === this[key])) {
             return this;
         }
         return new Model(this._enumerateData(data, { ...this }));

@@ -6,4 +6,4 @@ Example
 .gitignore
 src
 npm-debug.log
-debug.js
+example.js

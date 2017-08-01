@@ -1,5 +1,18 @@
 import Model from '../Model';
 
+class ExtendedModel extends Model {
+    constructor(data) {
+        super(data);
+    }
+
+    setFoo(value) {
+        return this.set('foo', value);
+    }
+
+    getFoo() {
+        return this.get('foo');
+    }
+}
 
 describe('Model', () => {
 
@@ -20,6 +33,13 @@ describe('Model', () => {
     it('wraps data with a model', () => {
         let testModel = new Model(testData);
         expect(testModel).toBeInstanceOf(Model);
+    });
+
+    it('wraps data with correct type for extended models', () => {
+        let testModel = new ExtendedModel({ foo: 'hello world!' });
+        let updatedModel = testModel.setFoo('test');
+
+        expect(updatedModel.getFoo()).toBe('test');
     });
 
     it('wraps fields with constructor from fieldConfig', () => {

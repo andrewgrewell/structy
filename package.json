@@ -1,6 +1,6 @@
 {
     "name": "structy",
-    "version": "1.0.1",
+    "version": "1.0.3",
     "description": "declarative immutable-ish data structures",
     "main": "dist/structy.js",
     "module": "src/index.js",
@@ -28,7 +28,7 @@
         "prepublish": "npm run build",
         "lint:eslint": "eslint --ignore-path .gitignore --ignore-pattern dist --fix",
         "lint:staged": "lint-staged",
-        "run:example": "babel-node ./example.js"
+        "example": "babel-node ./example.js"
     },
     "lint-staged": {
         "*.js": [
@@ -48,7 +48,8 @@
         "eslint": "^3.18.0",
         "jest": "^19.0.2",
         "lint-staged": "^3.4.0",
-        "pre-commit": "^1.2.2"
+        "pre-commit": "^1.2.2",
+        "webpack": "1.x"
     },
     "dependencies": {
         "lodash.every": "^4.6.0",

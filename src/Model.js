@@ -127,14 +127,14 @@ export default class Model {
         if (this[field] === value) {
             return this;
         }
-        return new Model({ ...this, [field]: this._checkWrapValue(value, this._getFieldConfigForKey(field)) });
+        return new this.constructor({ ...this, [field]: this._checkWrapValue(value, this._getFieldConfigForKey(field)) });
     }
 
     setIn(path, value) {
         if (this.getIn(path) === value) {
             return this;
         }
-        return new Model(
+        return new this.constructor(
             _set(
                 { ...this },
                 path,
@@ -147,7 +147,7 @@ export default class Model {
         if (every(data, (value, key) => value === this[key])) {
             return this;
         }
-        return new Model(this._enumerateData(data, { ...this }));
+        return new this.constructor(this._enumerateData(data, { ...this }));
     }
 
     remove(field) {
@@ -156,6 +156,6 @@ export default class Model {
         }
         const newModel = { ...this };
         delete newModel[field];
-        return new Model(newModel);
+        return new this.constructor(newModel);
     }
 }

@@ -20,6 +20,17 @@ $ yarn add structy
 import into your project
 ```javascript
 import { Model, Collection } from 'structy';
+// const { Model, Collection } = require('structy');
+```
+
+
+or add via global
+```
+<script src="https://cdn.jsdelivr.net/npm/structy@1.0.1/dist/structy.js" type="text/javascript"/>
+<script type="text/javascript>
+    const { Model, Collection } = structy;
+    ...
+</script>
 ```
 
 Usage

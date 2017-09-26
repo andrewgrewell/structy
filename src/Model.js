@@ -4,6 +4,7 @@ import forEach from 'lodash.forEach';
 import reduce from 'lodash.reduce';
 import every from 'lodash.every';
 import merge from 'lodash.merge';
+import _assign from 'lodash.assign';
 import _set from 'lodash.set';
 import _get from 'lodash.get';
 
@@ -147,7 +148,7 @@ export default class Model {
         if (every(data, (value, key) => value === this[key])) {
             return this;
         }
-        return new this.constructor(this._enumerateData(data, { ...this }));
+        return new this.constructor(_assign({ ...this }, data));
     }
 
     remove(field) {

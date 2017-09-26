@@ -5,6 +5,18 @@ class ExtendedModel extends Model {
         super(data);
     }
 
+    getType() {
+        return this.type;
+    }
+
+    getName() {
+        return this.name;
+    }
+
+    getItems() {
+        return this.items;
+    }
+
     setFoo(value) {
         return this.set('foo', value);
     }
@@ -115,5 +127,18 @@ describe('Model', () => {
     it('can be enumerated/destructured', () => {
         let testModel = setupModel();
         expect(...testModel).toEqual(...testData);
+    });
+
+    it('supports merging/assign', () => {
+        let testModel = new ExtendedModel(testData);
+        let newData = {
+            name: 'newTestData',
+            items: ['one', 'two', 'three']
+        };
+        let updatedModel = testModel.assign(newData);
+        expect(updatedModel.getType()).toEqual('test');
+        expect(updatedModel.getName()).toEqual('newTestData');
+        expect(updatedModel.getItems()).toEqual(expect.arrayContaining(['one', 'two', 'three']));
+        expect(updatedModel).not.toEqual(testModel);
     });
 });

@@ -111,8 +111,13 @@ export default class Collection {
         return this.items.indexOf(item);
     }
 
-    filter(fn) {
-        return this.items.filter(fn);
+    find(fn) {
+        return this.items.find(fn);
+    }
+
+    filter(fn, skipWrap) {
+        let filtered = this.items.filter(fn);
+        return skipWrap ? filtered : this._constructNew(filtered);
     }
 
     reduce(fn, initial) {

@@ -1,6 +1,6 @@
 {
     "name": "structy",
-    "version": "1.0.6",
+    "version": "1.0.7",
     "description": "declarative immutable-ish data structures",
     "main": "dist/structy.js",
     "module": "src/index.js",

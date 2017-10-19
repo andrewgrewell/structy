@@ -75,6 +75,9 @@ export default class Model {
     }
 
     _getFieldConfigForKey(key) {
+        if (!key) {
+            return;
+        }
         if (isArray(key) || key.includes('.')) {
             return _get(this.fieldConfig, key) || this.fieldConfig['*'];
         }

@@ -48,7 +48,7 @@ export default class Model {
             }
             else if (!existingValue) {
                 let wrappedValue = this._checkWrapValue(null, wrap);
-                if (wrappedValue) {
+                if (wrappedValue != null) {
                     if (path.length) {
                         // keeping with the precedent of only making first level props read only
                         // anything nested should be its own data structure
@@ -83,7 +83,7 @@ export default class Model {
     }
 
     _checkWrapValue(value, wrap) {
-        if (!wrap) {
+        if (wrap == null) {
             return value;
         }
         else if (typeof wrap === 'function') {
@@ -91,11 +91,11 @@ export default class Model {
         }
         // property config
         else if (isObject(wrap)) {
-            if (wrap.constructor && (value != null || wrap.nullable === false)) {
+            if (wrap.hasOwnProperty('constructor') && (value != null || wrap.nullable === false || wrap.default != null)) {
                 return new wrap.constructor(value || this._applyDefaultValue(wrap.default));
             }
-            else if (wrap.default) {
-                return this._applyDefaultValue(wrap.default);
+            else if (wrap.default != null) {
+                return this._applyDefaultValue(value || wrap.default);
             }
             else {
                 // nested property configs

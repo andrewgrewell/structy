@@ -28,8 +28,8 @@
         "prepublish": "npm run build",
         "lint:eslint": "eslint --ignore-path .gitignore --ignore-pattern dist --fix",
         "lint:staged": "lint-staged",
-        "example": "babel-node ./example.js",
-        "example:autoMethods": "babel-node ./autoDefineMethods.js"
+        "example": "babel-node ./examples/basic.js",
+        "example:autoMethods": "babel-node ./examples/autoDefineMethods.js"
     },
     "lint-staged": {
         "*.js": [

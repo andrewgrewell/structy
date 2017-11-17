@@ -1,5 +1,5 @@
-import Model from './src/Model';
-import Collection from './src/Collection';
+import Model from '../src/Model';
+import Collection from '../src/Collection';
 
 // base ingredient e.g. pickles
 class Ingredient extends Model {

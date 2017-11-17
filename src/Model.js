@@ -91,8 +91,10 @@ export default class Model {
         }
         // property config
         else if (isObject(wrap)) {
-            if (wrap.hasOwnProperty('constructor') && (value != null || wrap.nullable === false || wrap.default != null)) {
-                return new wrap.constructor(value || this._applyDefaultValue(wrap.default));
+            if (wrap.hasOwnProperty('constructor') && (value != null || wrap.nullable != null || wrap.default != null)) {
+                if (value || wrap.default || wrap.nullable === false) {
+                    return new wrap.constructor(value || this._applyDefaultValue(wrap.default));
+                }
             }
             else if (wrap.default != null) {
                 return this._applyDefaultValue(value || wrap.default);

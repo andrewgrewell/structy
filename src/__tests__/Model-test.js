@@ -93,6 +93,16 @@ describe('Model', () => {
         expect(testModel.get('count')).toBeInstanceOf(Number);
     });
 
+    it('supports nullable with config', () => {
+        let testModel = setupModel({
+            foo: {
+                nullable: true,
+                constructor: String
+            }
+        });
+        expect(testModel.get('foo')).toBeUndefined();
+    });
+
     it('supports nested values in field config', () => {
         let testModel = setupModel({
             foo: {

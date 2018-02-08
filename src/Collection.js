@@ -3,13 +3,12 @@ import Model from './Model';
 
 export default class Collection {
     constructor(items, ItemConstructor) {
-        if (items == null) {
-            return;
-        }
         if (items instanceof Collection || items.prototype instanceof Collection) {
             items = items.items;
         }
-        items = Array.isArray(items) ? items : [items];
+        if (items) {
+            items = Array.isArray(items) ? items : [items];
+        }
         this._defineProperties(items, ItemConstructor);
         this._initializeCollection(items);
     }
@@ -23,6 +22,9 @@ export default class Collection {
     }
 
     _initializeCollection(items) {
+        if (!items) {
+            return;
+        }
         items.forEach((item, i) => {
             let wrapped = this._checkWrapItem(item);
             this.items.push(wrapped);

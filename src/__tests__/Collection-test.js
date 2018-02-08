@@ -118,4 +118,13 @@ describe('Collection', () => {
         expect(stateC.length).toEqual(items.length);
         expect(stateC).not.toEqual(expect.arrayContaining([itemNotToAdd]));
     });
+
+    it('implments putBy', () => {
+        let newItem = { id: 1, isNew: true };
+        let replacer = (i => i.id === newItem.id);
+        let stateB = testCollection.putBy(newItem, replacer);
+        expect(stateB.length).toEqual(items.length);
+        let newItemInCollection = stateB.find(i => i.id === newItem.id);
+        expect(newItemInCollection.isNew).toBeTruthy();
+    });
 });

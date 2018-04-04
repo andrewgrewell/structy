@@ -98,6 +98,9 @@ export default class Model {
             else if (wrap.default != null) {
                 return this._applyDefaultValue(value || wrap.default);
             }
+            else if (Object.keys(wrap).length === 1 && !isObject(wrap[Object.keys(wrap)[0]])) {
+                return value;
+            }
             else {
                 // nested property configs
                 return reduce(wrap, (result, nestedValue, key) => {

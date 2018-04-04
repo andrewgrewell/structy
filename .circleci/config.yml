@@ -55,7 +55,7 @@ jobs:
           name: Run Jest Tests
           command: |
             yarn test;
-            ./cc-test-reporter after-build -t -p $CIRCLE_WORKING_DIRECTORY/reports/coverage lcov --exit-code $?
+            ./cc-test-reporter after-build -t lcov --exit-code $?
 
       - store_artifacts:
           path: reports/jest.html

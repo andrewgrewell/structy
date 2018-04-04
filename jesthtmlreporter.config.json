@@ -1,5 +1,5 @@
 {
   "executionMode": "reporter",
   "includeFailureMsg": true,
-  "outputPath": "reports/jest.html"
+  "outputPath": "coverage/test_results.html"
 }

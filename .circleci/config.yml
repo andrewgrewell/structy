@@ -53,7 +53,13 @@ jobs:
             ./cc-test-reporter before-build
       - run:
           name: Run Jest Tests
-          command: yarn test
+          command: yarn test; export STATUS_CODE=$?
+
+      - run:
+          name: Update Code Climate
+          command: |
+            ./cc-test-reporter after-build --exit-code $STATUS_CODE
+          when: on_fail
 
       - store_artifacts:
           path: reports/jest.html
@@ -62,11 +68,6 @@ jobs:
       - store_artifacts:
           path: reports/coverage/coverage/lcov-report/index.html
           prefix: coverage
-
-      - run:
-          name: Update Code Climate
-          command: |
-            ./cc-test-reporter after-build --exit-code $EXIT_CODE
 
 workflows:
   version: 2

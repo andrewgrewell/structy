@@ -1,0 +1,67 @@
+# Javascript Node CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-javascript/ for more details
+#
+version: 2
+
+machine:
+  environment:
+    CC_TEST_REPORTER_ID: f3c34f115ee822081772354c667c0e4a81993f5f8072698a940db41e98107dfe
+
+jobs:
+  test:
+    docker:
+      # specify the version you desire here
+      - image: circleci/node:6.11.5
+
+    steps:
+      - run:
+          name: Install Code Climate Deps
+          command: |
+            curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+            chmod +x ./cc-test-reporter
+            ./cc-test-reporter before-build
+
+      - checkout
+      - run:
+          name: Run Jest Tests
+          command: yarn test
+      - run:
+          name: Update Code Climate
+          command: |
+            ./cc-test-reporter after-build --exit-code $EXIT_CODE
+
+  build:
+    docker:
+      - image: circleci/node:6.11.5
+
+    working_directory: ~/structy
+
+    steps:
+      - checkout
+
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "package.json" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
+
+      - run: yarn install
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master

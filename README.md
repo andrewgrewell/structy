@@ -4,6 +4,8 @@
 
 **declarative immutable-ish data structures**
 
+[![Maintainability](https://api.codeclimate.com/v1/badges/ba444709dbfd44f895f6/maintainability)](https://codeclimate.com/github/andrewgrewell/structy/maintainability)
+
 </div>
 
 Structy aims to provide a flexible and declarative api for managing your application's data. There are other great

@@ -4,33 +4,7 @@
 #
 version: 2
 
-machine:
-  environment:
-    CC_TEST_REPORTER_ID: f3c34f115ee822081772354c667c0e4a81993f5f8072698a940db41e98107dfe
-
 jobs:
-  test:
-    docker:
-      # specify the version you desire here
-      - image: circleci/node:6.11.5
-
-    steps:
-      - run:
-          name: Install Code Climate Deps
-          command: |
-            curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-            chmod +x ./cc-test-reporter
-            ./cc-test-reporter before-build
-
-      - checkout
-      - run:
-          name: Run Jest Tests
-          command: yarn test
-      - run:
-          name: Update Code Climate
-          command: |
-            ./cc-test-reporter after-build --exit-code $EXIT_CODE
-
   build:
     docker:
       - image: circleci/node:6.11.5
@@ -53,6 +27,46 @@ jobs:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
+
+  test:
+    docker:
+      # specify the version you desire here
+      - image: circleci/node:6.11.5
+        environment:
+          CC_TEST_REPORTER_ID: f3c34f115ee822081772354c667c0e4a81993f5f8072698a940db41e98107dfe
+
+    working_directory: ~/structy
+
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "package.json" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
+
+      - run:
+          name: Install Code Climate Deps
+          command: |
+            curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+            chmod +x ./cc-test-reporter
+            ./cc-test-reporter before-build
+      - run:
+          name: Run Jest Tests
+          command: yarn test
+
+      - store_artifacts:
+          path: reports/jest.html
+          prefix: jest
+
+      - store_artifacts:
+          path: reports/coverage/coverage/lcov-report/index.html
+          prefix: coverage
+
+      - run:
+          name: Update Code Climate
+          command: |
+            ./cc-test-reporter after-build --exit-code $EXIT_CODE
 
 workflows:
   version: 2

@@ -1,6 +1,5 @@
-import isObject from 'lodash.isObject';
-import isArray from 'lodash.isArray';
-import forEach from 'lodash.forEach';
+import isObject from 'lodash.isobject';
+import forEach from 'lodash.foreach';
 import reduce from 'lodash.reduce';
 import every from 'lodash.every';
 import merge from 'lodash.merge';
@@ -76,7 +75,7 @@ export default class Model {
 
     _getFieldConfigForKey(key) {
         key = '' + key;
-        if (isArray(key) || key.includes('.')) {
+        if (Array.isArray(key) || key.includes('.')) {
             return _get(this.fieldConfig, key) || this.fieldConfig['*'];
         }
         return this.fieldConfig[key] || this.fieldConfig['*'];

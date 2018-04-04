@@ -24,7 +24,7 @@ import { Model, Collection } from 'structy';
 ```
 
 
-or add via global
+or add via global (use structy < 2.0.0)
 ```
 <script src="https://cdn.jsdelivr.net/npm/structy@1.0.1/dist/structy.js" type="text/javascript"/>
 <script type="text/javascript>

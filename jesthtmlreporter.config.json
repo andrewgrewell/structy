@@ -1,0 +1,5 @@
+{
+  "executionMode": "reporter",
+  "includeFailureMsg": true,
+  "outputPath": "reports/jest.html"
+}

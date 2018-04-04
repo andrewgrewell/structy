@@ -47,7 +47,7 @@ export default class Collection {
     }
 
     values() {
-        return this.items.values();
+        return this.items[Symbol.iterator]();
     }
 
     toArray() {
@@ -100,8 +100,8 @@ export default class Collection {
     }
 
     slice(start, end) {
-        let newItems = Array.slice(this.items, start, end);
-        return this._constructNew(newItems);
+        let newItems = this.toArray();
+        return this._constructNew(newItems.slice(start, end));
     }
 
     unshift(item) {

@@ -1,8 +1,8 @@
 {
     "name": "structy",
-    "version": "1.2.3",
+    "version": "2.0.0",
     "description": "declarative immutable-ish data structures",
-    "main": "dist/structy.js",
+    "main": "src/index.js",
     "module": "src/index.js",
     "author": "Andrew Grewell <andrewgrewell@gmail.com>",
     "license": "MIT",
@@ -24,8 +24,7 @@
     "homepage": "https://github.com/andrewgrewell/structy#readme",
     "scripts": {
         "test": "jest",
-        "build": "rm -rf dist && webpack -p",
-        "prepublish": "npm run build",
+        "prepublish": "yarn test && yarn run lint:eslint",
         "lint:eslint": "eslint --ignore-path .gitignore --ignore-pattern dist --fix",
         "lint:staged": "lint-staged",
         "example": "babel-node ./examples/basic.js",
@@ -42,15 +41,16 @@
     "devDependencies": {
         "babel-cli": "^6.24.0",
         "babel-eslint": "^7.2.0",
+        "babel-jest": "^22.4.3",
         "babel-loader": "^7.1.1",
         "babel-plugin-transform-es2015-modules-commonjs": "^6.24.1",
         "babel-preset-es2015": "^6.24.0",
         "babel-preset-stage-2": "^6.24.1",
         "eslint": "^3.18.0",
-        "jest": "^19.0.2",
+        "jest": "^22.4.3",
+        "jest-html-reporter": "^2.2.0",
         "lint-staged": "^3.4.0",
-        "pre-commit": "^1.2.2",
-        "webpack": "1.x"
+        "pre-commit": "^1.2.2"
     },
     "dependencies": {
         "lodash.assign": "^4.2.0",

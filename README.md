@@ -5,6 +5,7 @@
 **declarative immutable-ish data structures**
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/ba444709dbfd44f895f6/maintainability)](https://codeclimate.com/github/andrewgrewell/structy/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/ba444709dbfd44f895f6/test_coverage)](https://codeclimate.com/github/andrewgrewell/structy/test_coverage)
 
 </div>
 

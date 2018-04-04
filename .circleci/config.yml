@@ -59,14 +59,13 @@ jobs:
           name: Update Code Climate
           command: |
             ./cc-test-reporter after-build --exit-code $STATUS_CODE
-          when: on_fail
 
       - store_artifacts:
           path: reports/jest.html
           prefix: jest
 
       - store_artifacts:
-          path: reports/coverage/coverage/lcov-report/index.html
+          path: reports/coverage/lcov-report
           prefix: coverage
 
 workflows:

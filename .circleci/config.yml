@@ -53,12 +53,9 @@ jobs:
             ./cc-test-reporter before-build
       - run:
           name: Run Jest Tests
-          command: yarn test; export STATUS_CODE=$?
-
-      - run:
-          name: Update Code Climate
           command: |
-            ./cc-test-reporter after-build --exit-code $STATUS_CODE
+            yarn test;
+            ./cc-test-reporter after-build -t -p $CIRCLE_WORKING_DIRECTORY/reports/coverage lcov --exit-code $?
 
       - store_artifacts:
           path: reports/jest.html
